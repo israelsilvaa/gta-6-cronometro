@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grand Theft Auto VI — Contagem regressiva</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep:#241046; --violet:#4a1f8f; --purple:#7a35d6; --orchid:#c05bf0;
+  --pink:#ff6fd0; --lilac:#e9c9ff; --cyan:#5ee6e0; --cream:#fbf3ff;
+  --display:"Big Shoulders Display","Impact","Arial Narrow",sans-serif;
+  --body:"DM Sans","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{
+  font-family:var(--body);color:var(--cream);position:relative;
+  background:linear-gradient(180deg,#2d1358 0%,var(--violet) 40%,var(--purple) 75%,var(--orchid) 100%);
+}
+.sun{
+  position:absolute;left:50%;top:44%;width:min(60vh,68vw);aspect-ratio:1;border-radius:50%;
+  transform:translate(-50%,-50%);opacity:.9;
+  background:linear-gradient(180deg,#ffd6f6 0%,var(--pink) 45%,var(--orchid) 100%);
+  -webkit-mask:linear-gradient(#000,#000) top/100% 55% no-repeat,repeating-linear-gradient(180deg,#000 0 62%,transparent 62% 70%) bottom/100% 45% no-repeat;
+  mask:linear-gradient(#000,#000) top/100% 55% no-repeat,repeating-linear-gradient(180deg,#000 0 62%,transparent 62% 70%) bottom/100% 45% no-repeat;
+}
+.sea{position:absolute;left:0;right:0;bottom:0;height:20vh;background:linear-gradient(180deg,#3a1773 0%,#27104d 100%)}
+.sea::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent)}
+.palms{position:absolute;bottom:0;left:0;width:100%;height:44vh;pointer-events:none}
+.palms path,.palms ellipse{fill:#2a1157}
+
+main{position:relative;z-index:2;height:100%;display:grid;grid-template-rows:auto 1fr auto;padding:clamp(14px,3vh,32px) clamp(16px,4vw,56px)}
+header{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.brand{font-family:var(--display);font-weight:900;font-size:clamp(18px,3vh,28px);letter-spacing:.04em}
+.brand b{color:var(--pink)}
+.where{font-size:clamp(11px,1.6vh,14px);opacity:.85}
+
+.hero{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:0}
+.title{
+  font-family:var(--display);font-weight:900;line-height:.82;font-size:clamp(90px,27vh,290px);
+  color:var(--cream);text-shadow:0 .03em 0 var(--orchid),0 .07em 0 rgba(36,16,70,.6);
+}
+.sub{font-size:clamp(12px,2vh,18px);margin-top:1.2vh;opacity:.92}
+
+/* Cards */
+.timers{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(10px,2vw,26px);width:min(1000px,100%);margin:0 auto;align-items:stretch}
+.card{
+  --accent:var(--pink);
+  position:relative;border-radius:18px;padding:clamp(10px,1.8vh,18px) clamp(12px,2vw,22px);
+  background:linear-gradient(160deg,rgba(94,40,170,.62),rgba(40,16,82,.78));
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  box-shadow:0 10px 30px rgba(20,6,50,.35),inset 0 1px 0 rgba(255,255,255,.14);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s;
+  isolation:isolate;overflow:hidden;
+}
+.card.pre{--accent:var(--cyan)}
+/* borda em gradiente */
+.card::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;z-index:-1;
+  background:linear-gradient(135deg,var(--accent),rgba(255,255,255,.12) 45%,var(--orchid));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;opacity:.75;transition:opacity .3s;
+}
+/* brilho que passa no hover */
+.card::after{
+  content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;z-index:-1;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.16),transparent);
+  transform:skewX(-18deg);transition:left .8s ease;
+}
+.card:hover{transform:translateY(-6px);box-shadow:0 18px 44px rgba(20,6,50,.5),0 0 34px color-mix(in srgb,var(--accent) 45%,transparent),inset 0 1px 0 rgba(255,255,255,.2)}
+.card:hover::before{opacity:1}
+.card:hover::after{left:120%}
+
+.head{display:flex;align-items:center;gap:clamp(8px,1.2vw,14px)}
+.badge{
+  flex:none;width:clamp(34px,5.6vh,48px);aspect-ratio:1;border-radius:12px;display:grid;place-items:center;
+  background:color-mix(in srgb,var(--accent) 22%,transparent);color:var(--accent);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 55%,transparent);
+  transition:background .3s,color .3s,box-shadow .3s;
+}
+.badge svg{width:56%;height:56%;overflow:visible}
+.card:hover .badge{background:var(--accent);color:var(--deep);box-shadow:0 0 18px var(--accent)}
+.ttl{font-weight:700;font-size:clamp(14px,2.3vh,19px);line-height:1.15}
+.date{font-size:clamp(10px,1.6vh,13px);opacity:.8;margin-top:2px}
+
+.clock{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(5px,.8vw,10px);margin-top:clamp(8px,1.5vh,14px)}
+.cell{
+  position:relative;text-align:center;border-radius:10px;padding:clamp(5px,1vh,9px) 2px clamp(4px,.7vh,7px);
+  background:rgba(22,8,48,.55);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);
+  transition:background .3s,box-shadow .3s;
+}
+.card:hover .cell{background:rgba(22,8,48,.72);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 40%,transparent)}
+.num{
+  display:block;font-family:var(--display);font-weight:900;line-height:1;font-variant-numeric:tabular-nums;
+  font-size:clamp(28px,6.6vh,66px);color:var(--accent);
+}
+.pre .num{font-size:clamp(24px,5.2vh,50px)}
+.unit{display:block;font-style:normal;font-size:clamp(9px,1.4vh,12px);opacity:.75;margin-top:2px}
+.num.tick{animation:pop .35s ease}
+@keyframes pop{0%{transform:translateY(-35%);opacity:.2}100%{transform:none;opacity:1}}
+.done{grid-column:1/-1;text-align:center;font-family:var(--display);font-weight:900;font-size:clamp(26px,5.5vh,50px);color:var(--accent);padding:.6vh 0}
+
+/* ícones animados no hover */
+.rocket{transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.card:hover .rocket{transform:translate(2px,-3px) rotate(0deg)}
+.card:hover .flame{animation:flame .35s ease-in-out infinite alternate}
+@keyframes flame{from{transform:scaleY(.7)}to{transform:scaleY(1.25)}}
+.flame{transform-origin:12px 18px}
+.card.pre:hover .arrow{animation:down .8s ease-in-out infinite}
+@keyframes down{0%,100%{transform:translateY(-1.5px)}50%{transform:translateY(2.5px)}}
+
+footer{text-align:center;font-size:clamp(9px,1.4vh,12px);opacity:.7;margin-top:clamp(6px,1.4vh,14px)}
+
+@media (max-width:640px){
+  .timers{grid-template-columns:1fr;gap:8px}
+  .where{display:none}
+  .title{font-size:clamp(70px,18vh,180px)}
+  .num,.pre .num{font-size:clamp(22px,4.6vh,40px)}
+  .card{padding:8px 12px}
+  .clock{margin-top:6px}
+}
+@media (max-height:520px){.sub{display:none}}
+@media (prefers-reduced-motion:no-preference){
+  .sun{animation:rise 1.6s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes rise{from{transform:translate(-50%,-30%);opacity:0}to{transform:translate(-50%,-50%);opacity:.9}}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="sun" aria-hidden="true"></div>
+<div class="sea" aria-hidden="true"></div>
+
+<svg class="palms" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+  <defs>
+    <g id="palm">
+      <path d="M0 0 C6 -90 -10 -190 8 -280 L16 -280 C0 -190 18 -90 12 0 Z"/>
+      <ellipse cx="-62" cy="-282" rx="70" ry="9" transform="rotate(-28 -62 -282)"/>
+      <ellipse cx="-70" cy="-270" rx="68" ry="9" transform="rotate(12 -70 -270)"/>
+      <ellipse cx="82" cy="-282" rx="70" ry="9" transform="rotate(28 82 -282)"/>
+      <ellipse cx="88" cy="-268" rx="68" ry="9" transform="rotate(-12 88 -268)"/>
+      <ellipse cx="12" cy="-300" rx="9" ry="56" transform="rotate(4 12 -300)"/>
+    </g>
+  </defs>
+  <use href="#palm" transform="translate(110 400) scale(1.15)"/>
+  <use href="#palm" transform="translate(250 400) scale(.7)"/>
+  <use href="#palm" transform="translate(980 400) scale(1)"/>
+  <use href="#palm" transform="translate(1110 400) scale(1.25)"/>
+</svg>
+
+<main>
+  <header>
+    <div class="brand">GRAND THEFT AUTO <b>VI</b></div>
+    <div class="where">Horário de Brasília</div>
+  </header>
+
+  <section class="hero">
+    <h1 class="title">VI</h1>
+    <p class="sub">Bem-vindo a Leonida. Lançamento em 19 de novembro.</p>
+  </section>
+
+  <section>
+    <div class="timers">
+      <article class="card launch">
+        <div class="head">
+          <div class="badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <g class="rocket">
+                <path d="M12 2c3.5 2.2 5 5.6 5 9.5L15 15H9l-2-3.5C7 7.6 8.500 4.2 12 2z"/>
+                <circle cx="12" cy="9" r="1.6"/>
+                <path d="M9 15l-3 3 1 3 3-2M15 15l3 3-1 3-3-2"/>
+              </g>
+              <path class="flame" d="M10.5 18.5c0 1.5.6 2.8 1.5 3.500.9-.7 1.5-2 1.5-3.500"/>
+            </svg>
+          </div>
+          <div>
+            <div class="ttl">Lançamento</div>
+            <div class="date">19 de novembro de 2026</div>
+          </div>
+        </div>
+        <div class="clock" data-target="2026-11-19T00:00:00-03:00" data-done="Já disponível">
+          <div class="cell"><b class="num" data-u="d">--</b><i class="unit">dias</i></div>
+          <div class="cell"><b class="num" data-u="h">--</b><i class="unit">horas</i></div>
+          <div class="cell"><b class="num" data-u="m">--</b><i class="unit">min</i></div>
+          <div class="cell"><b class="num" data-u="s">--</b><i class="unit">seg</i></div>
+        </div>
+      </article>
+
+      <article class="card pre">
+        <div class="head">
+          <div class="badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <g class="arrow"><path d="M12 3v11M7.500 10 12 14.500 16.500 10"/></g>
+              <path d="M4 15v3.500A1.5 1.5 0 0 0 5.500 20h13a1.5 1.5 0 0 0 1.5-1.5V15"/>
+            </svg>
+          </div>
+          <div>
+            <div class="ttl">Pré-download</div>
+            <div class="date">12 de novembro de 2026</div>
+          </div>
+        </div>
+        <div class="clock" data-target="2026-11-12T00:00:00-03:00" data-done="Pré-download liberado">
+          <div class="cell"><b class="num" data-u="d">--</b><i class="unit">dias</i></div>
+          <div class="cell"><b class="num" data-u="h">--</b><i class="unit">horas</i></div>
+          <div class="cell"><b class="num" data-u="m">--</b><i class="unit">min</i></div>
+          <div class="cell"><b class="num" data-u="s">--</b><i class="unit">seg</i></div>
+        </div>
+      </article>
+    </div>
+    <footer>Página de fã, sem vínculo com a Rockstar Games. Confirme datas e horários nos canais oficiais.</footer>
+  </section>
+</main>
+
+<script>
+(function(){
+  var pad=function(n){return String(n).padStart(2,"0")};
+  var clocks=[].slice.call(document.querySelectorAll(".clock")).map(function(el){
+    return {el:el,target:new Date(el.dataset.target).getTime(),msg:el.dataset.done,nums:{}};
+  });
+  clocks.forEach(function(c){
+    [].forEach.call(c.el.querySelectorAll("[data-u]"),function(n){c.nums[n.dataset.u]=n});
+  });
+  function set(n,txt){
+    if(n.textContent!==txt){
+      n.textContent=txt;
+      n.classList.remove("tick");void n.offsetWidth;n.classList.add("tick");
+    }
+  }
+  function tick(){
+    var now=Date.now();
+    clocks.forEach(function(c){
+      var diff=c.target-now;
+      if(diff<=0){
+        if(!c.finished){c.el.innerHTML='<div class="done">'+c.msg+'</div>';c.finished=true}
+        return;
+      }
+      var s=Math.floor(diff/1000);
+      set(c.nums.d,String(Math.floor(s/86400)));
+      set(c.nums.h,pad(Math.floor(s%86400/3600)));
+      set(c.nums.m,pad(Math.floor(s%3600/60)));
+      set(c.nums.s,pad(s%60));
+    });
+  }
+  tick();setInterval(tick,1000);
+})();
+</script>
+</body>
+</html>
